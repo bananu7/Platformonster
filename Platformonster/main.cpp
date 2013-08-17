@@ -16,10 +16,11 @@ int main(void)
 
     // Config
     Config globalConfig;
-    globalConfig["player_hp"] = 100;
+    globalConfig.set("player_hp", 100);
+    globalConfig.set("bg_color", sf::Color(sf::Color(20, 100, 20)));
 
     // Game objects
-    World world(win);
+    World world(globalConfig, win);
     Player player(globalConfig, win);
     sf::Clock timer;
 

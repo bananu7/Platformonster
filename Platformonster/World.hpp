@@ -1,4 +1,5 @@
 #pragma once
+#include "Config.hpp"
 
 class World {
     std::vector<sf::Color> data;
@@ -6,6 +7,7 @@ class World {
     int displaySizeX, displaySizeY;
     float tileSizeX, tileSizeY;
     sf::RenderWindow& window;
+    Config& config;
 
     sf::Color& get(int x, int y) { return data[sizeY * x + y]; }
 
@@ -35,7 +37,7 @@ public:
         }
     }
 
-    World(sf::RenderWindow& win) : sizeX(20), sizeY(5), window(win) {
+    World(Config& config, sf::RenderWindow& win) : sizeX(20), sizeY(5), window(win), config(config) {
         int windowSizeX = win.getSize().x, windowSizeY = win.getSize().y;
         tileSizeX = windowSizeX / 10; //fixed 10 tiles in window
         tileSizeY = windowSizeY / sizeY;
@@ -43,9 +45,14 @@ public:
         displaySizeX = 10;
         displaySizeY = sizeY;
 
-        data = std::vector<sf::Color>(sizeX * sizeY, sf::Color::Green);
+        auto bgColor = config.get<sf::Color>("bg_color").get_value_or(sf::Color::Black);
 
+        data = std::vector<sf::Color>(sizeX * sizeY, bgColor);
+        
         for (int i = 0; i < std::min(sizeX, sizeY); ++i)
-            get(i, i) = sf::Color::Red;
+            get(i, -i) = sf::Color(20, 120, 20);
+
+        for (int i = 0; i < sizeX; ++i)
+            get(i, 0) = sf::Color(20, 120, 20);;
     }
 };
