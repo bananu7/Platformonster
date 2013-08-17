@@ -17,11 +17,11 @@ int main(void)
     // Config
     Config globalConfig;
     globalConfig.set("player_hp", 100);
-    globalConfig.set("bg_color", sf::Color(sf::Color(20, 100, 20)));
+    globalConfig.set("bg_color", sf::Color::Black);
 
     // Game objects
     Level level(globalConfig, win);
-    Player player(globalConfig, win);
+    Player player(globalConfig, win, level);
     sf::Clock timer;
 
     float delta = 0.f;
@@ -48,13 +48,13 @@ int main(void)
 
             // realtime input
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-                player.rawMove(sf::Vector2f(0, -5.f));
+                player.move(Direction::Up);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-                player.rawMove(sf::Vector2f(-5.f, 0));
+                player.move(Direction::Left);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-                player.rawMove(sf::Vector2f(5.f, 0));
+                player.move(Direction::Right);
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-                player.rawMove(sf::Vector2f(0, 5.f));
+                player.move(Direction::Down);
 
 
             level.draw(0.f);

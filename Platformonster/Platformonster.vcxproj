@@ -89,6 +89,7 @@
   <ItemGroup>
     <ClInclude Include="Config.hpp" />
     <ClInclude Include="Actor.hpp" />
+    <ClInclude Include="Physics.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="ResourceCache.hpp" />
     <ClInclude Include="Util.hpp" />

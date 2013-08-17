@@ -1,5 +1,6 @@
 #pragma once
 #include "Config.hpp"
+#include "Util.hpp"
 #include <vector>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -15,8 +16,16 @@ class Level {
     Config& config;
 
     sf::Color& get(int x, int y) { return data[sizeY * x + y]; }
+    sf::Color const& get(int x, int y) const { return data[sizeY * x + y]; }
 
 public:
+    bool isPassable(int x, int y) const {
+        return get(x, y) != sf::Color::Black;
+    }
+    Point toPixelCoordFromTileCoord(Point p) const {
+        return Point(p.x * tileSizeX, p.y * tileSizeY);
+    }
+
     void drawBlock(float x, float y, sf::Color c){
         sf::RectangleShape rectShape;
         rectShape.setSize(sf::Vector2f(tileSizeX, tileSizeY));
