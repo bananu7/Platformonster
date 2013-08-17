@@ -1,3 +1,5 @@
+#pragma once
+
 class World {
     std::vector<sf::Color> data;
     int sizeX, sizeY;

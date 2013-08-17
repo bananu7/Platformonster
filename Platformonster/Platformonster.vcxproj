@@ -87,8 +87,15 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Config.hpp" />
+    <ClInclude Include="Actor.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="ResourceCache.hpp" />
     <ClInclude Include="Util.hpp" />
     <ClInclude Include="World.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.gitignore" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

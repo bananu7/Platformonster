@@ -1,20 +1,26 @@
 #include <SFML/Graphics.hpp>
-#include <chrono>
-#include <thread>
 #include <iostream>
+#include <thread>
 #include <string>
-#include <future>
 
+#include "Config.hpp"
 #include "World.hpp"
+#include "Player.hpp"
 
 int main(void)
 {
-    int winSizeX = 640, winSizeY = 480;
+    // Window
+    int winSizeX = 800, winSizeY = 600;
     sf::RenderWindow win;
     win.create(sf::VideoMode(winSizeX, winSizeY), "");
 
+    // Config
+    Config globalConfig;
+    globalConfig["player_hp"] = 100;
+
+    // Game objects
     World world(win);
-    //inits random generator
+    Player player(globalConfig, win);
     sf::Clock timer;
 
     float delta = 0.f;
@@ -30,7 +36,6 @@ int main(void)
                 switch (event.type)
                 {
                     //case sf::Event::KeyPressed:
-                    //case sf::Event::KeyReleased:
                     /* case sf::Event::MouseButtonPressed:
                     case sf::Event::MouseButtonReleased:
                     //case sf::Event::MouseMoved:
@@ -38,11 +43,21 @@ int main(void)
                 case sf::Event::Closed:
                     return 0;
                 }
-
-
             }
 
-            world.draw(delta += 0.01f);
+            // realtime input
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+                player.rawMove(sf::Vector2f(0, -5.f));
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+                player.rawMove(sf::Vector2f(-5.f, 0));
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+                player.rawMove(sf::Vector2f(5.f, 0));
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+                player.rawMove(sf::Vector2f(0, 5.f));
+
+
+            world.draw(0.f);
+            player.draw();
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));
             win.display();
