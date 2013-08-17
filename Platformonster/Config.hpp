@@ -10,14 +10,14 @@ class Config {
     std::map<std::string, Option> data;
 public:
     template<typename T>
-    boost::optional<T> get(const std::string& name) {
+    T get(const std::string& name, T const& default_value) {
         auto it = data.find(name);
         if (it == data.end())
-            return boost::none;
+            return default_value;
 
         auto tryPtr = boost::get<T>(&(it->second));
         if (!tryPtr)
-            return boost::none;
+            return default_value;
 
         return *tryPtr;
     }

@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Config.hpp"
-#include "World.hpp"
+#include "Level.hpp"
 #include "Player.hpp"
 
 int main(void)
@@ -20,7 +20,7 @@ int main(void)
     globalConfig.set("bg_color", sf::Color(sf::Color(20, 100, 20)));
 
     // Game objects
-    World world(globalConfig, win);
+    Level level(globalConfig, win);
     Player player(globalConfig, win);
     sf::Clock timer;
 
@@ -57,7 +57,7 @@ int main(void)
                 player.rawMove(sf::Vector2f(0, 5.f));
 
 
-            world.draw(0.f);
+            level.draw(0.f);
             player.draw();
 
             std::this_thread::sleep_for(std::chrono::milliseconds(10));

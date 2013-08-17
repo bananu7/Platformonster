@@ -92,7 +92,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="ResourceCache.hpp" />
     <ClInclude Include="Util.hpp" />
-    <ClInclude Include="World.hpp" />
+    <ClInclude Include="Level.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.gitignore" />
